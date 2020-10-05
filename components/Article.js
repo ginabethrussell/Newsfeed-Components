@@ -86,6 +86,25 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    // Part 2: Added data for two additional articles 
+    title: 'Building Career Skills with Track Teams',
+    date: 'Sep 28th, 2020',
+    firstParagraph: `In an increasingly competitive and ever-evolving job market, employers are looking for new hires who not only have technical knowledge, but also the ability to work collaboratively with others, communicate clearly, and engage effectively within teams. Participating in your Track team will provide you with opportunities to build your leadership skills, strengthen your technical skills, expand your network, and participate in mentorship - skills that can set you apart in the job search. `,
+
+    secondParagraph: `On the job, you will find yourself taking on many different roles as you move between different departments, projects and companies. We will give you an opportunity to practice stepping into some of these roles while working with your track team. `,
+
+    thirdParagraph: ` Each role will give you an opportunity to practice a specific set of leadership skills. A rotation set up by Lambda staff will determine which team members take on different roles during a given sprint. Roles will rotate between Facilitator, Zoom Master, Note Taker, and Promise Tracker.`
+  },
+  {
+    title: 'Battling Back Impostor Syndrome for the Win',
+    date: 'Oct 5th, 2020',
+    firstParagraph: `Impostor Syndrome is an experience humans have felt for a while, but it had no formal name until 1978 when Dr. Pauline Clance and Dr. Suzanne Imes coined it as “Impostor Phenomenon”. Initially, they focused on studying this pattern of internal experience and thoughts in women. As more researchers built upon the work of Clance and Imes, it became evident that this phenomenon transcends gender, race, age, social status, religious affiliation, or sexual orientation. This was a human experience. `,
+
+    secondParagraph: `Some moments we feel and believe we may not be capable of doing a task or taking on a role, despite available evidence to the contrary. In these moments we may feel like a “fraud” or “impostor” who will be discovered at any moment. Though initially coined as “impostor phenomenon”, this experience is now known as “impostor syndrome.`,
+
+    thirdParagraph: `Variations of impostor syndrome include the Perfectionist, he Expert, the Natural, and the Soloist. Check out the Lambda Career Center for helpful resources and the Lambda Impostor Syndrome Slack Channel for support.`
   }
 ];
 
@@ -163,6 +182,3 @@ data.forEach(article => {
   // append the new article to the end of the articles div
   articles.appendChild(articleMaker(article));
 });
-//articles.appendChild(articleMaker(data[0]));
-
-//console.log(articleMaker(data[0]));
