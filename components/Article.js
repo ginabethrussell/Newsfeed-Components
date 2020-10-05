@@ -114,3 +114,55 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+// Step 1
+function articleMaker(articleObj){
+  // Grab text data from the object
+  const h2Text = articleObj.title;
+  const pDate = articleObj.date;
+  const p1Text = articleObj.firstParagraph;
+  const p2Text = articleObj.secondParagraph;
+  const p3Text = articleObj.thirdParagraph;
+  // Create html elements and modify to match article component
+  const parentDiv = document.createElement('div');
+  parentDiv.classList.add('article');
+  const h2Element = document.createElement('h2');
+  h2Element.textContent = h2Text;
+  parentDiv.appendChild(h2Element);
+  const pDateElement = document.createElement('p');
+  pDateElement.classList.add('date');
+  pDateElement.textContent = pDate;
+  parentDiv.appendChild(pDateElement);
+  const p1Element = document.createElement('p');
+  p1Element.textContent = p1Text;
+  parentDiv.appendChild(p1Element);
+  const p2Element = document.createElement('p');
+  p2Element.textContent = p2Text;
+  parentDiv.appendChild(p2Element);
+  const p3Element = document.createElement('p');
+  p3Element.textContent = p3Text;
+  parentDiv.appendChild(p3Element);
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = '+';
+
+  //This listener should toggle the class 'article-open' on div.article.
+  span.addEventListener('click',() =>{
+    parentDiv.classList.toggle('article-open');
+  });
+  parentDiv.appendChild(span);
+  // Return html article component
+  return parentDiv;
+}
+
+// Grab the articles parent div from the DOM
+const articles = document.querySelector('.articles');
+// Loop over data object array of articles
+data.forEach(article => {
+  // Use the articleMaker function to create and return the article
+  // append the new article to the end of the articles div
+  articles.appendChild(articleMaker(article));
+});
+//articles.appendChild(articleMaker(data[0]));
+
+//console.log(articleMaker(data[0]));
