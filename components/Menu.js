@@ -36,17 +36,41 @@ function menuMaker(arr){
   const div = document.createElement('div');
   div.classList.add('menu');
   const unorderedList = document.createElement('ul');
+  unorderedList.classList.add('menu-list');
   arr.forEach(item => {
     const listItem = document.createElement('li');
     listItem.textContent = item;
+    listItem.classList.add('menu-choice');
     unorderedList.appendChild(listItem);
   });
   div.appendChild(unorderedList);
   console.log(div);
   const menuButton = document.querySelector('.menu-button');
-  menuButton.addEventListener('click', () => {
+
+  // menu slides in and out from the side using greensock animations
+  menuButton.addEventListener('click', (e) => {
+    if (div.classList.contains('menu--open')){
+      gsap.to(div,{duration: 1, x: 0, ease:'power4' } );
+    }else{
+      gsap.to(div,{duration: 1, x: 350, ease:'power4' } );
+    }
     div.classList.toggle('menu--open');
+    e.stopPropagation();
   });
+
+  // menu slides out if user clicks anwhere other than the menu on the document and the menu is open
+  document.addEventListener('click', (e)=> {
+    console.log(e);
+    console.log(e.target.classList);
+ 
+    if(div.classList.contains('menu--open')){
+      console.log(e.path[0])
+      if (!e.target.classList.contains('menu-choice')&& !e.target.classList.contains('menu-list') && !e.target.classList.contains('menu')){
+        gsap.to(div,{duration: 1, x: 0, ease:'power4' } );
+        div.classList.remove('menu--open');
+      }
+    }  
+  })
   return div;
 }
 
