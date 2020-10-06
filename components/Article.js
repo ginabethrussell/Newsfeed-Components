@@ -161,15 +161,35 @@ function articleMaker(articleObj){
   const p3Element = document.createElement('p');
   p3Element.textContent = p3Text;
   parentDiv.appendChild(p3Element);
+
   const span = document.createElement('span');
   span.classList.add('expandButton');
-  span.textContent = '+';
-
-  //This listener should toggle the class 'article-open' on div.article.
+  span.textContent = 'Click to Expand';
+  
+  // This listener should toggle the class 'article-open' on div.article.
+  // Added GSAP animations to expand and close articles
   span.addEventListener('click',() =>{
     parentDiv.classList.toggle('article-open');
+    if(parentDiv.classList.contains('article-open')){
+      TweenMax.to(parentDiv, 1, {height: '400px'});
+      span.textContent = 'Click to Close'
+    }else{
+      TweenMax.to(parentDiv, 1, {height: '50px'});
+      span.textContent = 'Click to Expand';
+    }
   });
+
   parentDiv.appendChild(span);
+  // Create x button to delete articles when read
+  const readBtn = document.createElement('span');
+  readBtn.classList.add('readBtn');
+  readBtn.textContent = 'x';
+
+  readBtn.addEventListener('click', (e) => {
+    e.target.parentNode.classList.add('close');
+  })
+  parentDiv.appendChild(readBtn);
+
   // Return html article component
   return parentDiv;
 }
