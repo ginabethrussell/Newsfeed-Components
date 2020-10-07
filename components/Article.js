@@ -172,10 +172,12 @@ function articleMaker(articleObj){
     parentDiv.classList.toggle('article-open');
     if(parentDiv.classList.contains('article-open')){
       TweenMax.to(parentDiv, 1, {height: '400px'});
+      //parentDiv.style.overflow = 'auto';
       span.textContent = 'Click to Close'
     }else{
       TweenMax.to(parentDiv, 1, {height: '50px'});
       span.textContent = 'Click to Expand';
+      //parentDiv.style.overflow = 'hidden';
     }
   });
 
@@ -202,3 +204,28 @@ data.forEach(article => {
   // append the new article to the end of the articles div
   articles.appendChild(articleMaker(article));
 });
+
+// Write and add your own article
+const submitBtn = document.querySelector("input[type='submit']");
+submitBtn.addEventListener('click', (e)=> {
+  e.preventDefault();
+  const newdate = document.querySelector("input[type='date']").value;
+  console.log(newdate);
+  const articleTitle = document.querySelector("input[type='text']#title").value;
+  console.log(articleTitle);
+  const paragraphOne = document.querySelector('textArea#first-paragraph').value;
+  const paragraphTwo = document.querySelector('textArea#second-paragraph').value;
+  const paragraphThree = document.querySelector('textArea#third-paragraph').value;
+  console.log(paragraphOne, paragraphTwo, paragraphThree);
+
+  const newParObj = {
+    title: articleTitle,
+    date: newdate,
+    firstParagraph: paragraphOne,
+    secondParagraph: paragraphTwo,
+    thirdParagraph: paragraphThree
+  }
+  const nextArticle = articleMaker(newParObj);
+  articles.appendChild(nextArticle);
+})
+console.log(submitBtn);
