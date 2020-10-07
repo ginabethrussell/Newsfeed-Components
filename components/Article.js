@@ -86,6 +86,25 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    // Part 2: Added data for two additional articles 
+    title: 'Building Career Skills with Track Teams',
+    date: 'Sep 28th, 2020',
+    firstParagraph: `In an increasingly competitive and ever-evolving job market, employers are looking for new hires who not only have technical knowledge, but also the ability to work collaboratively with others, communicate clearly, and engage effectively within teams. Participating in your Track team will provide you with opportunities to build your leadership skills, strengthen your technical skills, expand your network, and participate in mentorship - skills that can set you apart in the job search. `,
+
+    secondParagraph: `On the job, you will find yourself taking on many different roles as you move between different departments, projects and companies. We will give you an opportunity to practice stepping into some of these roles while working with your track team. `,
+
+    thirdParagraph: ` Each role will give you an opportunity to practice a specific set of leadership skills. A rotation set up by Lambda staff will determine which team members take on different roles during a given sprint. Roles will rotate between Facilitator, Zoom Master, Note Taker, and Promise Tracker.`
+  },
+  {
+    title: 'Battling Back Impostor Syndrome for the Win',
+    date: 'Oct 5th, 2020',
+    firstParagraph: `Impostor Syndrome is an experience humans have felt for a while, but it had no formal name until 1978 when Dr. Pauline Clance and Dr. Suzanne Imes coined it as “Impostor Phenomenon”. Initially, they focused on studying this pattern of internal experience and thoughts in women. As more researchers built upon the work of Clance and Imes, it became evident that this phenomenon transcends gender, race, age, social status, religious affiliation, or sexual orientation. This was a human experience. `,
+
+    secondParagraph: `Some moments we feel and believe we may not be capable of doing a task or taking on a role, despite available evidence to the contrary. In these moments we may feel like a “fraud” or “impostor” who will be discovered at any moment. Though initially coined as “impostor phenomenon”, this experience is now known as “impostor syndrome.`,
+
+    thirdParagraph: `Variations of impostor syndrome include the Perfectionist, he Expert, the Natural, and the Soloist. Check out the Lambda Career Center for helpful resources and the Lambda Impostor Syndrome Slack Channel for support.`
   }
 ];
 
@@ -114,3 +133,99 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+// Step 1
+function articleMaker(articleObj){
+  // Grab text data from the object
+  const h2Text = articleObj.title;
+  const pDate = articleObj.date;
+  const p1Text = articleObj.firstParagraph;
+  const p2Text = articleObj.secondParagraph;
+  const p3Text = articleObj.thirdParagraph;
+  // Create html elements and modify to match article component
+  const parentDiv = document.createElement('div');
+  parentDiv.classList.add('article');
+  const h2Element = document.createElement('h2');
+  h2Element.textContent = h2Text;
+  parentDiv.appendChild(h2Element);
+  const pDateElement = document.createElement('p');
+  pDateElement.classList.add('date');
+  pDateElement.textContent = pDate;
+  parentDiv.appendChild(pDateElement);
+  const p1Element = document.createElement('p');
+  p1Element.textContent = p1Text;
+  parentDiv.appendChild(p1Element);
+  const p2Element = document.createElement('p');
+  p2Element.textContent = p2Text;
+  parentDiv.appendChild(p2Element);
+  const p3Element = document.createElement('p');
+  p3Element.textContent = p3Text;
+  parentDiv.appendChild(p3Element);
+
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = 'Click to Expand';
+  
+  // This listener should toggle the class 'article-open' on div.article.
+  // Added GSAP animations to expand and close articles
+  span.addEventListener('click',() =>{
+    parentDiv.classList.toggle('article-open');
+    if(parentDiv.classList.contains('article-open')){
+      TweenMax.to(parentDiv, 1, {height: '400px'});
+      //parentDiv.style.overflow = 'auto';
+      span.textContent = 'Click to Close'
+    }else{
+      TweenMax.to(parentDiv, 1, {height: '50px'});
+      span.textContent = 'Click to Expand';
+      //parentDiv.style.overflow = 'hidden';
+    }
+  });
+
+  parentDiv.appendChild(span);
+  // Create x button to delete articles when read
+  const readBtn = document.createElement('span');
+  readBtn.classList.add('readBtn');
+  readBtn.textContent = 'x';
+
+  readBtn.addEventListener('click', (e) => {
+    e.target.parentNode.classList.add('close');
+  })
+  parentDiv.appendChild(readBtn);
+
+  // Return html article component
+  return parentDiv;
+}
+
+// Grab the articles parent div from the DOM
+const articles = document.querySelector('.articles');
+// Loop over data object array of articles
+data.forEach(article => {
+  // Use the articleMaker function to create and return the article
+  // append the new article to the end of the articles div
+  articles.appendChild(articleMaker(article));
+});
+
+// Write and add your own article
+const submitBtn = document.querySelector("input[type='submit']");
+submitBtn.addEventListener('click', (e)=> {
+  e.preventDefault();
+  const newdate = document.querySelector("input[type='date']").value;
+  console.log(newdate);
+  const articleTitle = document.querySelector("input[type='text']#title").value;
+  console.log(articleTitle);
+  const paragraphOne = document.querySelector('textArea#first-paragraph').value;
+  const paragraphTwo = document.querySelector('textArea#second-paragraph').value;
+  const paragraphThree = document.querySelector('textArea#third-paragraph').value;
+  console.log(paragraphOne, paragraphTwo, paragraphThree);
+
+  const newParObj = {
+    title: articleTitle,
+    date: newdate,
+    firstParagraph: paragraphOne,
+    secondParagraph: paragraphTwo,
+    thirdParagraph: paragraphThree
+  }
+  const nextArticle = articleMaker(newParObj);
+  articles.appendChild(nextArticle);
+})
+console.log(submitBtn);

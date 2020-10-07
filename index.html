@@ -5,6 +5,7 @@
     <title>Lambda School Newsfeed</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/index.less">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js' defer></script>
     <script src="./components/Menu.js" defer></script>
     <script src="./components/Article.js" defer></script>
   </head>
@@ -14,6 +15,18 @@
       <h1>Lambda School Newsfeed</h1>
     </div>
     <div class="articles"></div>
+    <form>
+      <h3>Write and Add Your Own Article</h3>
+      <label class="label" for="date">Date</label>
+      <input class='input' type="date" name="date" id="date">
+      <label class="label" for="title">Article Title</label>
+      <input class='input' type="text" name="text" id="title">
+      <label class="label" for="paragraphs">Type your paragraphs here: </label>
+      <textarea class='input' name="paragraphs" id="first-paragraph" cols="30" rows="10"></textarea>
+      <textarea class='input' name="paragraphs" id="second-paragraph" cols="30" rows="10"></textarea>
+      <textarea class='input' name="paragraphs" id="third-paragraph" cols="30" rows="10"></textarea>
+      <input type="submit">
+    </form>
   </body>
 </html>
 <!-- Do not add anything to the HTML -->
